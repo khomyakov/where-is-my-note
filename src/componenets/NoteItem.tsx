@@ -25,7 +25,7 @@ const NoteItem = ({ note }: { note: Note }) => {
                     <p className="text-sm text-gray-500">{note.content}</p>
                 </div>)}
 
-                <div className="flex space-x-2 opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition duration-200">
+                <div className="flex space-x-2 opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition duration-200 ml-4">
                     <Link to={`/notes/${note.id}`} className="text-green-500">
                         <LuArrowRight size={20} />
                     </Link>

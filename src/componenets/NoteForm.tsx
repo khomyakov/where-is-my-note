@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { Note } from '../types/note';
 import { useCreateNote } from '../hooks/useCreateNote';
 import { useUpdateNote } from '../hooks/useUpdateNote';
+import dayjs from 'dayjs';
 
 const NoteForm = ({ note }: { note?: Note }) => {
   const { register, handleSubmit, reset } = useForm({
@@ -20,22 +21,37 @@ const NoteForm = ({ note }: { note?: Note }) => {
     reset();
   };
 
+  const lastEdited = note?.timestamp ? dayjs(note?.timestamp).format('DD/MM/YYYY HH:mm') : null;
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input
-        type="text"
-        placeholder="Title"
-        {...register('title')}
-        className="w-full p-2 mb-2 border"
-      />
-      <textarea
-        placeholder="Content"
-        {...register('content')}
-        className="w-full p-2 mb-2 border"
-      />
-      <button type="submit" className="p-2 bg-blue-500 text-white">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full bg-white/10">
+      <div className="mb-4">
+        <input
+          type="text"
+          placeholder="Title"
+          {...register('title')}
+          className="w-full font-bold p-2 border-b border-gray-300 rounded-t-lg rounded-b-lg placeholder-gray-500 focus:outline-none focus:border-blue-500"
+        />
+      </div>
+      <div className="mb-4">
+        <textarea
+          placeholder="Content"
+          {...register('content')}
+          className="w-full p-2 border-b border-gray-300 rounded-t-lg rounded-b-lg placeholder-gray-500 focus:outline-none focus:border-blue-500"
+          rows={4}
+        />
+      </div>
+      <div className="flex justify-between">
+        {note ? (
+          <span className="p-2 font-thin text-gray text-sm">Edited at: {lastEdited}</span>
+        ) : <span></span>}
+        <button
+        type="submit"
+        className="bg-blue-500 p-2 pl-10 pr-10 text-white rounded-full hover:bg-blue-600 transition duration-200"
+      >
         {note ? 'Update Note' : 'Add Note'}
       </button>
+      </div>
     </form>
   );
 };
