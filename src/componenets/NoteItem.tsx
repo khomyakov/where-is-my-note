@@ -10,11 +10,11 @@ const NoteItem = ({ note }: { note: Note }) => {
   };
 
   return (
-    <div className="p-4 border-b flex justify-between items-center">
-      <Link to={`/notes/${note.id}`} className="flex-1">
+    <div className="p-4 border-b flex justify-between items-center hover:bg-gray-100 transition duration-200">
+      <Link to={`/notes/${note.id}`} className="flex-1 no-underline">
         <div>
-          <h2 className="text-xl font-bold">{note.title}</h2>
-          <p>{note.content}</p>
+          <h2 className="text-lg font-semibold text-gray-900">{note.title}</h2>
+          <p className="text-sm text-gray-500">{note.content}</p>
         </div>
       </Link>
       <button
