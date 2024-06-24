@@ -5,7 +5,7 @@ import { useUpdateNote } from '../hooks/useUpdateNote';
 import dayjs from 'dayjs';
 
 const NoteForm = ({ note }: { note?: Note }) => {
-  const { register, handleSubmit, reset } = useForm({
+  const { register, handleSubmit } = useForm({
     defaultValues: note || { title: '', content: '' },
   });
 
@@ -18,7 +18,6 @@ const NoteForm = ({ note }: { note?: Note }) => {
     } else {
       createNote.mutate(data);
     }
-    reset();
   };
 
   const lastEdited = note?.timestamp

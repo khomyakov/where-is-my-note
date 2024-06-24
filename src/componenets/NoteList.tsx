@@ -59,32 +59,7 @@ const NoteList = ({ searchQuery }: { searchQuery: string }) => {
     <div className="min-w-full md:min-w-[650px] lg:min-w-[1024px] border border-gray-300 rounded-lg bg-white">
       <div className="flex justify-between border-b border-gray-300">
         <h1 className="p-4 text-lg font-semibold">Notes</h1>
-        <div className="flex justify-end mb-4 mt-4 mr-4 ">
-          <button
-            onClick={() => handleSort('id')}
-            className="p-2 hover:bg-gray-300 border border-gray-300 rounded-l-lg"
-          >
-            <LiaSortSolid />
-          </button>
-          <button
-            onClick={() => handleSort('dateAsc')}
-            className="p-2 hover:bg-gray-300 border border-gray-300"
-          >
-            <LiaSortNumericUpSolid />
-          </button>
-          <button
-            onClick={() => handleSort('dateDesc')}
-            className="p-2  hover:bg-gray-300 border border-gray-300"
-          >
-            <LiaSortNumericDownSolid />
-          </button>
-          <button
-            onClick={() => handleSort('title')}
-            className="p-2  hover:bg-gray-300 border border-gray-300 rounded-r-lg"
-          >
-            <LiaSortAlphaDownSolid />
-          </button>
-        </div>
+        <SortingButtons handleSort={handleSort} />
       </div>
       <Virtuoso
         data={sortedNotes}
@@ -105,5 +80,38 @@ const NoteList = ({ searchQuery }: { searchQuery: string }) => {
     </div>
   );
 };
+
+const SortingButtons = ({
+  handleSort,
+}: {
+  handleSort: (criteria: 'id' | 'dateAsc' | 'dateDesc' | 'title') => void;
+}) => (
+  <div className="flex justify-end mb-4 mt-4 mr-4 ">
+    <button
+      onClick={() => handleSort('id')}
+      className="p-2 hover:bg-gray-300 border border-gray-300 rounded-l-lg"
+    >
+      <LiaSortSolid />
+    </button>
+    <button
+      onClick={() => handleSort('dateAsc')}
+      className="p-2 hover:bg-gray-300 border border-gray-300"
+    >
+      <LiaSortNumericUpSolid />
+    </button>
+    <button
+      onClick={() => handleSort('dateDesc')}
+      className="p-2 hover:bg-gray-300 border border-gray-300"
+    >
+      <LiaSortNumericDownSolid />
+    </button>
+    <button
+      onClick={() => handleSort('title')}
+      className="p-2 hover:bg-gray-300 border border-gray-300 rounded-r-lg"
+    >
+      <LiaSortAlphaDownSolid />
+    </button>
+  </div>
+);
 
 export default NoteList;
