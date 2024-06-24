@@ -1,12 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteNote } from "../api/api";
 import { Note } from "../types/note";
+import toast from "react-hot-toast";
 
 export const useDeleteNote = () => {
   const queryClient = useQueryClient();
   return useMutation<number, Error, number>({
     mutationFn: deleteNote,
     onSuccess: (id) => {
+      toast('Note is deleted!');
       console.log("successfully deleted a note", id);
       queryClient.setQueryData(['notes', 5], (oldData: any) => {
         console.log('Old Data:', oldData); // Log the old data to debug
@@ -21,5 +23,8 @@ export const useDeleteNote = () => {
       // queryClient.invalidateQueries({ queryKey: ['notes'] });
       // queryClient.invalidateQueries({ queryKey: ['note', id] });
     },
+    onError: () => {
+      toast.error('Failed to delete note!');
+    }
   });
 };

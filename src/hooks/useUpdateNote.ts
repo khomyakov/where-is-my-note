@@ -1,12 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateNote } from "../api/api";
 import { Note } from "../types/note";
+import toast from "react-hot-toast";
 
 export const useUpdateNote = (id: number) => {
   const queryClient = useQueryClient();
   return useMutation<Note, Error, { title: string; content: string }>({
     mutationFn: (note) => updateNote(id, note),
     onSuccess: (updatedNote) => {
+      toast.success('Note is updated!');
       queryClient.setQueryData(['notes', 5], (oldData: any) => {
         const newData = {
           ...oldData,
@@ -20,5 +22,8 @@ export const useUpdateNote = (id: number) => {
       // queryClient.invalidateQueries({ queryKey: ['notes'] });
       // queryClient.invalidateQueries({ queryKey: ['note', id] });
     },
+    onError: () => {
+      toast.error('Failed to update note!');
+    }
   });
 };
