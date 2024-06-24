@@ -1,5 +1,5 @@
-import { useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { fetchNotes, fetchNoteById, createNote, updateNote, deleteNote } from '../api/api';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { fetchNotes } from '../api/api';
 
 export const useNotes = (limit: number) => {
     return useInfiniteQuery({
