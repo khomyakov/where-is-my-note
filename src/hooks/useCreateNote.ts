@@ -1,10 +1,24 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createNote, } from '../api/api';
+import { Note } from '../types/note';
 
 export const useCreateNote = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-      mutationFn: createNote,
-      onSuccess: () => queryClient.invalidateQueries({ queryKey: ['notes'] }),
-    });
-  };
+  const queryClient = useQueryClient();
+  return useMutation<Note, Error, { title: string; content: string }>({
+    mutationFn: createNote,
+    onSuccess: (newNote) => {
+      queryClient.setQueryData(['notes'], (oldData: any) => {
+        if (!oldData) {
+          return { pages: [[newNote]], pageParams: [undefined] };
+        }
+        const newData = {
+          ...oldData,
+          pages: oldData.pages.map((page: Note[]) => [...page, newNote]),
+        };
+        return newData;
+      });
+      queryClient.setQueryData(['note', newNote.id], newNote);
+      // queryClient.invalidateQueries({ queryKey: ['notes'] });
+    },
+  });
+};

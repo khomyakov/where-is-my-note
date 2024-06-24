@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useNote } from '../hooks/useNote';
 import NoteForm from '../componenets/NoteForm';
