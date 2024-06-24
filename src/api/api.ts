@@ -4,10 +4,10 @@ export const api = axios.create({
   baseURL: 'https://my-json-server.typicode.com/oleksandr-devico/where-is-my-note',
 });
 
-export const fetchNotes = async () => {
-  const response = await api.get('/notes');
-  return response.data;
-};
+export const fetchNotes = async (page: number, limit: number) => {
+    const response = await api.get(`/notes?_page=${page}&_limit=${limit}`);
+    return response.data;
+  };
 
 export const fetchNoteById = async (id: string) => {
   const response = await api.get(`/notes/${id}`);
