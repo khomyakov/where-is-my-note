@@ -8,7 +8,7 @@ const queryClient = new QueryClient();
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen bg-gray-100 p-4">
+      <div className="flex justify-center bg-gray-200 min-h-screen p-4">
         <AppRouter />
       </div>
       <ReactQueryDevtools initialIsOpen={false} />

@@ -9,7 +9,7 @@ const NoteForm = ({ note }: { note?: Note }) => {
   });
 
   const createNote = useCreateNote();
-  const updateNote = useUpdateNote(note?.id);
+  const updateNote = useUpdateNote(note?.id ?? 0);
 
   const onSubmit = (data: { title: string; content: string }) => {
     if (note) {

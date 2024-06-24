@@ -16,8 +16,7 @@ const NoteList = () => {
   const notes: Note[] = data?.pages.flat() || [];
 
   return (
-    <div className="flex justify-center bg-gray-200 min-h-screen p-4">
-      <div className="w-[1024px] border border-gray-300 rounded-lg bg-white">
+    <div className="w-[1024px] border border-gray-300 rounded-lg bg-white">
     <Virtuoso
       data={notes}
       endReached={() => {
@@ -33,7 +32,7 @@ const NoteList = () => {
       style={{ height: '80vh' }}
     />
     </div>
-    </div>
+
   );
 };
 
