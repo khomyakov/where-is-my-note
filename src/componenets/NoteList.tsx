@@ -2,7 +2,7 @@ import { Virtuoso } from 'react-virtuoso';
 import { useNotes } from '../hooks/useNotes';
 import NoteItem from './NoteItem';
 import { Note } from '../types/note';
-import { uniqBy, sortBy } from 'lodash';
+import { sortBy } from 'lodash';
 import { useState } from 'react';
 import { LiaSortSolid, LiaSortNumericDownSolid, LiaSortAlphaDownSolid, LiaSortNumericUpSolid } from "react-icons/lia"
 
@@ -15,16 +15,34 @@ const NoteList = ({searchQuery}:{searchQuery: string}) => {
     hasNextPage,
   } = useNotes(5); // Load 5 notes per request
 
-  const [sortBy, setSortBy] = useState<'id' | 'dateAsc' | 'dateDesc' | 'title'>('id');
+  const [criteria, setCriteria] = useState<'id' | 'dateAsc' | 'dateDesc' | 'title'>('id');
   
   const handleSort = (criteria: 'id' | 'dateAsc' | 'dateDesc' | 'title') => {
-    setSortBy(criteria);
+    setCriteria(criteria);
   };
   
   if (isLoading) return <div>Loading...</div>;
 
   const notes: Note[] = data?.pages.flat() || [];
   const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(searchQuery.toLowerCase()) || note.content.toLowerCase().includes(searchQuery.toLowerCase()));
+
+  let sortedNotes = filteredNotes;
+
+  switch (criteria) {
+    case 'dateAsc':
+        sortedNotes = sortBy(filteredNotes, (note: Note) => new Date(note.timestamp).getTime());
+      break;
+    case 'dateDesc':
+        sortedNotes = sortBy(filteredNotes, (note: Note) => -new Date(note.timestamp).getTime());
+      break;
+    case 'title':
+        sortedNotes = sortBy(filteredNotes, 'title');
+      break;
+    case 'id':
+    default:
+        sortedNotes = sortBy(filteredNotes, 'id');
+      break;
+  }
 
   return (
     <div className="min-w-full md:min-w-[650px] lg:min-w-[1024px] border border-gray-300 rounded-lg bg-white">
@@ -46,7 +64,7 @@ const NoteList = ({searchQuery}:{searchQuery: string}) => {
         </div>
         </div>
     <Virtuoso
-      data={filteredNotes}
+      data={sortedNotes}
       endReached={() => {
         if (hasNextPage) {
           fetchNextPage();
