@@ -16,6 +16,8 @@ const NoteList = () => {
 
   const notes: Note[] = data?.pages.flat() || [];
 
+  console.log(notes)
+
   return (
     <Virtuoso
       data={notes}
@@ -24,11 +26,16 @@ const NoteList = () => {
           fetchNextPage();
         }
       }}
-      itemContent={(index, note) => (
-        <div key={note.id}>
-          <NoteItem note={note} />
-        </div>
-      )}
+      itemContent={(index, note) => {
+        console.log("Here!");
+        console.log(note)
+            return (
+            <div key={note.id}>
+            <NoteItem note={note} />
+            </div>
+        )}
+        }
+        style={{ height: '80vh' }}
     />
   );
 };

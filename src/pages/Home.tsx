@@ -1,7 +1,6 @@
 import React from 'react';
-import NoteForm from '../componenets/NoteList';
+import NoteForm from '../componenets/NoteForm';
 import NoteList from '../componenets/NoteList';
-
 
 const Home = () => {
   return (
