@@ -21,7 +21,9 @@ const NoteForm = ({ note }: { note?: Note }) => {
     reset();
   };
 
-  const lastEdited = note?.timestamp ? dayjs(note?.timestamp).format('DD/MM/YYYY HH:mm') : null;
+  const lastEdited = note?.timestamp
+    ? dayjs(note?.timestamp).format('DD/MM/YYYY HH:mm')
+    : null;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full bg-white/10">
@@ -43,14 +45,18 @@ const NoteForm = ({ note }: { note?: Note }) => {
       </div>
       <div className="flex justify-between">
         {note ? (
-          <span className="p-2 font-thin text-gray text-sm">Edited at: {lastEdited}</span>
-        ) : <span></span>}
+          <span className="p-2 font-thin text-gray text-sm">
+            Edited at: {lastEdited}
+          </span>
+        ) : (
+          <span></span>
+        )}
         <button
-        type="submit"
-        className="bg-blue-500 p-2 pl-10 pr-10 text-white rounded-full hover:bg-blue-600 transition duration-200"
-      >
-        {note ? 'Update Note' : 'Add Note'}
-      </button>
+          type="submit"
+          className="bg-blue-500 p-2 pl-10 pr-10 text-white rounded-full hover:bg-blue-600 transition duration-200"
+        >
+          {note ? 'Update Note' : 'Add Note'}
+        </button>
       </div>
     </form>
   );

@@ -1,7 +1,7 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateNote } from "../api/api";
-import { Note } from "../types/note";
-import toast from "react-hot-toast";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { updateNote } from '../api/api';
+import { Note } from '../types/note';
+import toast from 'react-hot-toast';
 
 export const useUpdateNote = (id: number) => {
   const queryClient = useQueryClient();
@@ -13,7 +13,9 @@ export const useUpdateNote = (id: number) => {
         const newData = {
           ...oldData,
           pages: oldData.pages.map((page: Note[]) =>
-            page.map((note: Note) => (note.id === updatedNote.id ? updatedNote : note))
+            page.map((note: Note) =>
+              note.id === updatedNote.id ? updatedNote : note,
+            ),
           ),
         };
         return newData;
@@ -24,6 +26,6 @@ export const useUpdateNote = (id: number) => {
     },
     onError: () => {
       toast.error('Failed to update note!');
-    }
+    },
   });
 };
