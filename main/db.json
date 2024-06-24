@@ -1,31 +1,31 @@
 {
     "notes": [
       {
-        "id": "1e75b340-4c57-11ec-81d3-0242ac130003",
+        "id": 1,
         "title": "First Note",
         "timestamp": "2024-06-24T10:00:00Z",
         "content": "This is the content of the first note."
       },
       {
-        "id": "1e75b7b6-4c57-11ec-81d3-0242ac130003",
+        "id": 2,
         "title": "Second Note",
         "timestamp": "2024-06-24T11:00:00Z",
         "content": "This is the content of the second note."
       },
       {
-        "id": "1e75b9b4-4c57-11ec-81d3-0242ac130003",
+        "id": 3,
         "title": "Third Note",
         "timestamp": "2024-06-24T12:00:00Z",
         "content": "This is the content of the third note."
       },
       {
-        "id": "1e75bb6e-4c57-11ec-81d3-0242ac130003",
+        "id": 4,
         "title": "Fourth Note",
         "timestamp": "2024-06-24T13:00:00Z",
         "content": "This is the content of the fourth note."
       },
       {
-        "id": "1e75bd24-4c57-11ec-81d3-0242ac130003",
+        "id": 5,
         "title": "Fifth Note",
         "timestamp": "2024-06-24T14:00:00Z",
         "content": "This is the content of the fifth note."
