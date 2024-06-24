@@ -10,7 +10,7 @@ export const useDeleteNote = () => {
     onSuccess: (id) => {
       toast('Note is deleted!');
       console.log('successfully deleted a note', id);
-      queryClient.setQueryData(['notes', 5], (oldData: any) => {
+      queryClient.setQueryData(['notes', 10], (oldData: any) => {
         console.log('Old Data:', oldData); // Log the old data to debug
         const newData = {
           ...oldData,

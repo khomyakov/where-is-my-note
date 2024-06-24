@@ -9,7 +9,7 @@ export const useUpdateNote = (id: number) => {
     mutationFn: (note) => updateNote(id, note),
     onSuccess: (updatedNote) => {
       toast.success('Note is updated!');
-      queryClient.setQueryData(['notes', 5], (oldData: any) => {
+      queryClient.setQueryData(['notes', 10], (oldData: any) => {
         const newData = {
           ...oldData,
           pages: oldData.pages.map((page: Note[]) =>

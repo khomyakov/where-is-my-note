@@ -13,7 +13,7 @@ import {
 import { ErrorBoundary } from 'react-error-boundary';
 
 const NoteList = ({ searchQuery }: { searchQuery: string }) => {
-  const { data, isLoading, fetchNextPage, hasNextPage } = useNotes(5); // Load 5 notes per request
+  const { data, isLoading, fetchNextPage, hasNextPage } = useNotes(10); // Load 10 notes per request
 
   const [criteria, setCriteria] = useState<
     'id' | 'dateAsc' | 'dateDesc' | 'title'

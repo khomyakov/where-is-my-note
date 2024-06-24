@@ -105,7 +105,7 @@ export const useCreateNote = () => {
   return useMutation(createNote, {
    onSuccess: (data) => {
     // Remove the queryClient.setQueryData() calls below
-    queryClient.setQueryData(['notes', 5], (oldData) => {
+    queryClient.setQueryData(['notes', 10], (oldData) => {
       const newData = {
        ...oldData,
        pages: oldData.pages.map((page) => [...page, data]),
