@@ -5,6 +5,7 @@ import { Note } from '../types/note';
 import { sortBy } from 'lodash';
 import { useState } from 'react';
 import { LiaSortSolid, LiaSortNumericDownSolid, LiaSortAlphaDownSolid, LiaSortNumericUpSolid } from "react-icons/lia"
+import { ErrorBoundary } from 'react-error-boundary';
 
 
 const NoteList = ({searchQuery}:{searchQuery: string}) => {
@@ -47,7 +48,7 @@ const NoteList = ({searchQuery}:{searchQuery: string}) => {
   return (
     <div className="min-w-full md:min-w-[650px] lg:min-w-[1024px] border border-gray-300 rounded-lg bg-white">
         <div className="flex justify-between border-b border-gray-300">
-        <h1 className="p-4 text-lg font-semibold ">Notes</h1>
+        <h1 className="p-4 text-lg font-semibold">Notes</h1>
         <div className="flex justify-end mb-4 mt-4 mr-4 ">
           <button onClick={() => handleSort('id')} className="p-2 hover:bg-gray-300 border border-gray-300 rounded-l-lg">
             <LiaSortSolid />
@@ -72,7 +73,9 @@ const NoteList = ({searchQuery}:{searchQuery: string}) => {
       }}
       itemContent={(index, note: Note) => (
         <div key={note.id}>
-          <NoteItem note={note} />
+        <ErrorBoundary fallback={<div>Error rendering {index} item</div>}>
+            <NoteItem note={note} />
+          </ErrorBoundary>
         </div>
       )}
       style={{ height: '80vh' }}
