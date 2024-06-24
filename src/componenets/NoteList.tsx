@@ -3,7 +3,7 @@ import { useNotes } from '../hooks/useNotes';
 import NoteItem from './NoteItem';
 import { Note } from '../types/note';
 
-const NoteList = () => {
+const NoteList = ({searchQuery}:{searchQuery: string}) => {
   const {
     data,
     isLoading,
@@ -14,11 +14,13 @@ const NoteList = () => {
   if (isLoading) return <div>Loading...</div>;
 
   const notes: Note[] = data?.pages.flat() || [];
+  const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(searchQuery.toLowerCase()) || note.content.toLowerCase().includes(searchQuery.toLowerCase()));
 
   return (
-    <div className="w-[1024px] border border-gray-300 rounded-lg bg-white">
+    <div className="min-w-full md:min-w-[650px] lg:min-w-[1024px] border border-gray-300 rounded-lg bg-white">
+        <h1 className="p-4 text-lg font-semibold border-b border-gray-300">Notes</h1>
     <Virtuoso
-      data={notes}
+      data={filteredNotes}
       endReached={() => {
         if (hasNextPage) {
           fetchNextPage();
