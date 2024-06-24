@@ -1,4 +1,3 @@
-import React from 'react';
 import { Virtuoso } from 'react-virtuoso';
 import { useNotes } from '../hooks/useNotes';
 import NoteItem from './NoteItem';
@@ -16,8 +15,6 @@ const NoteList = () => {
 
   const notes: Note[] = data?.pages.flat() || [];
 
-  console.log(notes)
-
   return (
     <Virtuoso
       data={notes}
@@ -26,16 +23,12 @@ const NoteList = () => {
           fetchNextPage();
         }
       }}
-      itemContent={(index, note) => {
-        console.log("Here!");
-        console.log(note)
-            return (
-            <div key={note.id}>
-            <NoteItem note={note} />
-            </div>
-        )}
-        }
-        style={{ height: '80vh' }}
+      itemContent={(index, note: Note) => (
+        <div key={note.id}>
+          <NoteItem note={note} />
+        </div>
+      )}
+      style={{ height: '80vh' }}
     />
   );
 };

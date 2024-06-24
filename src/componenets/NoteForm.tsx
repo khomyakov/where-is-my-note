@@ -1,4 +1,3 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Note } from '../types/note';
 import { useCreateNote } from '../hooks/useCreateNote';
@@ -10,7 +9,7 @@ const NoteForm = ({ note }: { note?: Note }) => {
   });
 
   const createNote = useCreateNote();
-  const updateNote = useUpdateNote(note?.id.toString());
+  const updateNote = useUpdateNote(note?.id);
 
   const onSubmit = (data: { title: string; content: string }) => {
     if (note) {

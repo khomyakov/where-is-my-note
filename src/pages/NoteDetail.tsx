@@ -4,7 +4,7 @@ import NoteForm from '../componenets/NoteForm';
 
 const NoteDetail = () => {
   const { id } = useParams();
-  const { data: note, isLoading } = useNote(id);
+  const { data: note, isLoading } = useNote(Number(id));
 
   if (isLoading) return <div>Loading...</div>;
 

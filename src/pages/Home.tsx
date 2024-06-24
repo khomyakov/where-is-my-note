@@ -1,4 +1,3 @@
-import React from 'react';
 import NoteForm from '../componenets/NoteForm';
 import NoteList from '../componenets/NoteList';
 

@@ -7,7 +7,7 @@ export const useCreateNote = () => {
   return useMutation<Note, Error, { title: string; content: string }>({
     mutationFn: createNote,
     onSuccess: (newNote) => {
-      queryClient.setQueryData(['notes'], (oldData: any) => {
+      queryClient.setQueryData(['notes', 5], (oldData: any) => {
         if (!oldData) {
           return { pages: [[newNote]], pageParams: [undefined] };
         }

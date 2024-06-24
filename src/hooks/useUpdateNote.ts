@@ -2,12 +2,12 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateNote } from "../api/api";
 import { Note } from "../types/note";
 
-export const useUpdateNote = (id: string) => {
+export const useUpdateNote = (id: number) => {
   const queryClient = useQueryClient();
   return useMutation<Note, Error, { title: string; content: string }>({
     mutationFn: (note) => updateNote(id, note),
     onSuccess: (updatedNote) => {
-      queryClient.setQueryData(['notes'], (oldData: any) => {
+      queryClient.setQueryData(['notes', 5], (oldData: any) => {
         const newData = {
           ...oldData,
           pages: oldData.pages.map((page: Note[]) =>
