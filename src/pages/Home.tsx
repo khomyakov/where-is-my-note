@@ -36,14 +36,14 @@ const Home = () => {
           {searchQuery && (
             <button
               onClick={handleClear}
-              className="p-2 hover:bg-gray-300 border border-l-0 rounded-r-lg border-gray-300"
+              className="p-2 bg-white hover:bg-gray-300 border border-l-0 rounded-r-lg border-gray-300"
             >
               <LuXCircle size={24} />
             </button>
           )}
           <button
             onClick={handleExpandCollapse}
-            className="ml-2 p-2 bg-blue-800 hover:bg-blue-950 border border-gray-300 rounded-lg"
+            className="ml-2 bg-blue-500 p-2 text-white rounded-full hover:bg-blue-600"
           >
             <LuStickyNote color="white" size={24} />
           </button>
