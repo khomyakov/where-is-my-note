@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { useNote } from '../hooks/useNote';
-import NoteForm from '../componenets/NoteForm';
+import NoteForm from '../components/NoteForm';
 
 const NoteDetail = () => {
   const { id } = useParams();

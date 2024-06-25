@@ -1,5 +1,5 @@
-import NoteForm from '../componenets/NoteForm';
-import NoteList from '../componenets/NoteList';
+import NoteForm from '../components/NoteForm';
+import NoteList from '../components/NoteList';
 import React, { useState } from 'react';
 import { LuStickyNote, LuXCircle } from 'react-icons/lu';
 import clsx from 'clsx';
