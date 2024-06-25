@@ -38,7 +38,7 @@ const NoteList = ({ searchQuery }: { searchQuery: string }) => {
   const sortedNotes = useSortedNotes(filteredNotes, criteria);
 
   if (isLoading) return <div>Loading...</div>;
-  
+
   return (
     <div className="min-w-full md:min-w-[650px] lg:min-w-[1024px] border border-gray-300 rounded-lg bg-white">
       <div className="flex justify-between border-b border-gray-300">
