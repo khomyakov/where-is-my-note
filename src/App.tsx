@@ -1,8 +1,8 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import AppRouter from './router.tsx';
+import AppRouter from './router';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
-import { refetchOptions } from './utils/refetchOptions.ts';
+import { refetchOptions } from './utils/refetchOptions';
 
 const queryClient = new QueryClient({
   defaultOptions: {
