@@ -1,3 +1,7 @@
+import ClearButton from './ClearButton';
+import ExpandCollapseButton from './ExpandCollapseButton';
+import SearchInput from './SearchInput';
+
 interface SearchBarProps {
   searchQuery: string;
   setSearchQuery: (query: string) => void;

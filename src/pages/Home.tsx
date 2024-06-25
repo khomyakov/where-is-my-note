@@ -1,8 +1,8 @@
-import NoteForm from '../components/NoteForm';
 import NoteList from '../components/NoteList';
 import { useState } from 'react';
 import useDebounce from '../hooks/useDebounce';
 import SearchBar from '../components/Home/SearchBar';
+import NoteFormContainer from '../components/Home/NoteFormContainer';
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -38,18 +38,5 @@ const Home = () => {
     </>
   );
 };
-
-const NoteFormContainer = ({
-  isExpanded,
-  onExpandCollapse,
-}: {
-  isExpanded: boolean;
-  onExpandCollapse: () => void;
-}) =>
-  isExpanded && (
-    <div className="mt-4 p-4 bg-gray-100 border border-gray-300 rounded-lg">
-      <NoteForm onAddNote={onExpandCollapse} />
-    </div>
-  );
 
 export default Home;
