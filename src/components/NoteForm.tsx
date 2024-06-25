@@ -4,15 +4,24 @@ import { useCreateNote } from '../hooks/useCreateNote';
 import { useUpdateNote } from '../hooks/useUpdateNote';
 import dayjs from 'dayjs';
 
+type NoteFormInputs = {
+  title: string;
+  content: string;
+};
+
 const NoteForm = ({ note }: { note?: Note }) => {
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<NoteFormInputs>({
     defaultValues: note || { title: '', content: '' },
   });
 
   const createNote = useCreateNote();
   const updateNote = useUpdateNote(note?.id ?? 0);
 
-  const onSubmit = (data: { title: string; content: string }) => {
+  const onSubmit = (data: NoteFormInputs) => {
     if (note) {
       updateNote.mutate(data);
     } else {
@@ -30,17 +39,23 @@ const NoteForm = ({ note }: { note?: Note }) => {
         <input
           type="text"
           placeholder="Title"
-          {...register('title')}
+          {...register('title', { required: 'Title is required' })}
           className="w-full font-bold p-2 border-b border-gray-300 rounded-t-lg rounded-b-lg placeholder-gray-500 focus:outline-none focus:border-blue-500"
         />
+        {errors.title && (
+          <span className="text-red-500">{errors.title.message}</span>
+        )}
       </div>
       <div className="mb-4">
         <textarea
           placeholder="Content"
-          {...register('content')}
+          {...register('content', { required: 'Content is required' })}
           className="w-full p-2 border-b border-gray-300 rounded-t-lg rounded-b-lg placeholder-gray-500 focus:outline-none focus:border-blue-500"
           rows={4}
         />
+        {errors.content && (
+          <span className="text-red-500">{errors.content.message}</span>
+        )}
       </div>
       <div className="flex justify-between">
         {note ? (
