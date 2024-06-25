@@ -7,9 +7,9 @@ import { refetchOptions } from './utils/refetchOptions.ts';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      ...refetchOptions
-    }
-  }
+      ...refetchOptions,
+    },
+  },
 });
 
 const App = () => {

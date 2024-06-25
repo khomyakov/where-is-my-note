@@ -10,13 +10,10 @@ const SearchBar = ({
   setSearchQuery,
   onClear,
   onExpandCollapse,
-}:SearchBarProps) => {
+}: SearchBarProps) => {
   return (
     <div className="flex items-center">
-      <SearchInput
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-      />
+      <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <ClearButton searchQuery={searchQuery} onClear={onClear} />
       <ExpandCollapseButton onExpandCollapse={onExpandCollapse} />
     </div>

@@ -11,20 +11,23 @@ export const useCreateNote = (onAddNote?: () => void) => {
     mutationFn: createNote,
     onSuccess: (newNote) => {
       toast.success('New note created successfully!');
-      queryClient.setQueryData(['notes'], (oldData: PaginatedNotes | undefined) => {
-        if (!oldData) {
-          return { pages: [[newNote]], pageParams: [undefined] };
-        }
-        const newData = {
-          ...oldData,
-          pages: oldData.pages.map((page: Note[]) => [...page, newNote]),
-        };
-        return newData;
-      });
+      queryClient.setQueryData(
+        ['notes'],
+        (oldData: PaginatedNotes | undefined) => {
+          if (!oldData) {
+            return { pages: [[newNote]], pageParams: [undefined] };
+          }
+          const newData = {
+            ...oldData,
+            pages: oldData.pages.map((page: Note[]) => [...page, newNote]),
+          };
+          return newData;
+        },
+      );
       queryClient.setQueryData(['note', newNote.id], newNote);
       // Optionally invalidate queries if using a real API
       // queryClient.invalidateQueries({ queryKey: ['notes'] });
-      
+
       onAddNote?.();
     },
     onError: () => {
