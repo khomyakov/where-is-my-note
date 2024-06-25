@@ -64,6 +64,7 @@ src/
 ├── hooks/              # Custom hooks
 ├── pages/              # Page components
 ├── types/              # TypeScript types
+├── utils/              # Utility functions, shared costants
 ├── App.css             # Main CSS file
 ├── App.tsx             # Main application component
 ├── index.css           # Global CSS
