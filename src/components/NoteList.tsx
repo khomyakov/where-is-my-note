@@ -2,7 +2,6 @@ import { Virtuoso } from 'react-virtuoso';
 import { useNotes } from '../hooks/useNotes';
 import NoteItem from './NoteItem';
 import { Note } from '../types/note';
-import { sortBy, uniqBy } from 'lodash';
 import { useMemo, useState } from 'react';
 import {
   LiaSortSolid,
@@ -11,6 +10,7 @@ import {
   LiaSortNumericUpSolid,
 } from 'react-icons/lia';
 import { ErrorBoundary } from 'react-error-boundary';
+import useSortedNotes from '../hooks/useSortedNotes';
 
 const NoteList = ({ searchQuery }: { searchQuery: string }) => {
   const { data, isLoading, fetchNextPage, hasNextPage } = useNotes(10); // Load 10 notes per request
@@ -27,37 +27,18 @@ const NoteList = ({ searchQuery }: { searchQuery: string }) => {
     setCriteria(criteria);
   };
 
+  const filteredNotes = useMemo(() => {
+    return notes.filter(
+      (note) =>
+        note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        note.content.toLowerCase().includes(searchQuery.toLowerCase()),
+    );
+  }, [notes, searchQuery]);
+
+  const sortedNotes = useSortedNotes(filteredNotes, criteria);
+
   if (isLoading) return <div>Loading...</div>;
-
-  const filteredNotes = notes.filter(
-    (note) =>
-      note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      note.content.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
-
-  let sortedNotes = filteredNotes;
-
-  switch (criteria) {
-    case 'dateAsc':
-      sortedNotes = sortBy(filteredNotes, (note: Note) =>
-        new Date(note.timestamp).getTime(),
-      );
-      break;
-    case 'dateDesc':
-      sortedNotes = sortBy(
-        filteredNotes,
-        (note: Note) => -new Date(note.timestamp).getTime(),
-      );
-      break;
-    case 'title':
-      sortedNotes = sortBy(filteredNotes, 'title');
-      break;
-    case 'id':
-    default:
-      sortedNotes = sortBy(filteredNotes, 'id');
-      break;
-  }
-
+  
   return (
     <div className="min-w-full md:min-w-[650px] lg:min-w-[1024px] border border-gray-300 rounded-lg bg-white">
       <div className="flex justify-between border-b border-gray-300">
@@ -65,7 +46,7 @@ const NoteList = ({ searchQuery }: { searchQuery: string }) => {
         <SortingButtons handleSort={handleSort} />
       </div>
       <Virtuoso
-        data={uniqBy(sortedNotes, 'id')}
+        data={sortedNotes}
         endReached={() => {
           if (hasNextPage) {
             fetchNextPage();
