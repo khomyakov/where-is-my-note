@@ -7,5 +7,5 @@ export interface Note {
 
 export interface PaginatedNotes {
   pages: Note[][];
-  pageParams: unknown[];
+  pageParams: number[];
 }

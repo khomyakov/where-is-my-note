@@ -2,7 +2,7 @@ import { Virtuoso } from 'react-virtuoso';
 import { useNotes } from '../hooks/useNotes';
 import NoteItem from './NoteItem';
 import { Note } from '../types/note';
-import { sortBy } from 'lodash';
+import { sortBy, uniqBy } from 'lodash';
 import { useMemo, useState } from 'react';
 import {
   LiaSortSolid,
@@ -65,7 +65,7 @@ const NoteList = ({ searchQuery }: { searchQuery: string }) => {
         <SortingButtons handleSort={handleSort} />
       </div>
       <Virtuoso
-        data={sortedNotes}
+        data={uniqBy(sortedNotes, 'id')}
         endReached={() => {
           if (hasNextPage) {
             fetchNextPage();

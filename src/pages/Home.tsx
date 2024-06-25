@@ -31,7 +31,10 @@ const Home = () => {
           <ClearButton searchQuery={searchQuery} handleClear={handleClear} />
           <ExpandCollapseButton handleExpandCollapse={handleExpandCollapse} />
         </div>
-        <NoteFormContainer isExpanded={isExpanded} />
+        <NoteFormContainer
+          isExpanded={isExpanded}
+          handleExpandCollapse={handleExpandCollapse}
+        />
       </div>
 
       <NoteList searchQuery={debouncedSearchQuery} />
@@ -87,10 +90,16 @@ const ExpandCollapseButton = ({
   </button>
 );
 
-const NoteFormContainer = ({ isExpanded }: { isExpanded: boolean }) =>
+const NoteFormContainer = ({
+  isExpanded,
+  handleExpandCollapse,
+}: {
+  isExpanded: boolean;
+  handleExpandCollapse: () => void;
+}) =>
   isExpanded && (
     <div className="mt-4 p-4 bg-gray-100 border border-gray-300 rounded-lg">
-      <NoteForm />
+      <NoteForm onAddNote={handleExpandCollapse} />
     </div>
   );
 

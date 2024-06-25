@@ -9,7 +9,12 @@ type NoteFormInputs = {
   content: string;
 };
 
-const NoteForm = ({ note }: { note?: Note }) => {
+interface NoteFormProps {
+  note?: Note;
+  onAddNote?: () => void;
+}
+
+const NoteForm = ({ note, onAddNote }: NoteFormProps) => {
   const {
     register,
     handleSubmit,
@@ -26,6 +31,7 @@ const NoteForm = ({ note }: { note?: Note }) => {
       updateNote.mutate(data);
     } else {
       createNote.mutate(data);
+      onAddNote?.();
     }
   };
 
