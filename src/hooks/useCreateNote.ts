@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createNote } from '../api/api';
-import { Note } from '../types/note';
+import { Note, PaginatedNotes } from '../types/note';
 import toast from 'react-hot-toast';
 
 export const useCreateNote = () => {
@@ -9,7 +9,7 @@ export const useCreateNote = () => {
     mutationFn: createNote,
     onSuccess: (newNote) => {
       toast.success('New note created successfully!');
-      queryClient.setQueryData(['notes'], (oldData: any) => {
+      queryClient.setQueryData(['notes'], (oldData: PaginatedNotes) => {
         if (!oldData) {
           return { pages: [[newNote]], pageParams: [undefined] };
         }

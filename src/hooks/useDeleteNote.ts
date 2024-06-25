@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteNote } from '../api/api';
-import { Note } from '../types/note';
+import { Note, PaginatedNotes } from '../types/note';
 import toast from 'react-hot-toast';
 
 export const useDeleteNote = () => {
@@ -11,7 +11,7 @@ export const useDeleteNote = () => {
       toast('Note is deleted!');
 
       // The queryClient.setQueryData can be removed when connected to the real api and replaced with invalidations below
-      queryClient.setQueryData(['notes'], (oldData: any) => {
+      queryClient.setQueryData(['notes'], (oldData: PaginatedNotes) => {
         console.log('Old Data:', oldData); // Log the old data to debug
         const newData = {
           ...oldData,

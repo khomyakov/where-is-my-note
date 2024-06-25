@@ -15,6 +15,10 @@ import { ErrorBoundary } from 'react-error-boundary';
 const NoteList = ({ searchQuery }: { searchQuery: string }) => {
   const { data, isLoading, fetchNextPage, hasNextPage } = useNotes(10); // Load 10 notes per request
 
+  const notes: Note[] = useMemo(() => {
+    return data?.pages.flat() || [];
+  }, [data]);
+
   const [criteria, setCriteria] = useState<
     'id' | 'dateAsc' | 'dateDesc' | 'title'
   >('id');
@@ -24,10 +28,6 @@ const NoteList = ({ searchQuery }: { searchQuery: string }) => {
   };
 
   if (isLoading) return <div>Loading...</div>;
-
-  const notes: Note[] = useMemo(() => {
-    return data?.pages.flat() || [];
-  }, [data]);
 
   const filteredNotes = notes.filter(
     (note) =>

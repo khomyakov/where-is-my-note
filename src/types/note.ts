@@ -4,3 +4,8 @@ export interface Note {
   timestamp: string;
   content: string;
 }
+
+export interface PaginatedNotes {
+  pages: Note[][];
+  pageParams: unknown[];
+}

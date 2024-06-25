@@ -1,6 +1,6 @@
 import NoteForm from '../components/NoteForm';
 import NoteList from '../components/NoteList';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { LuStickyNote, LuXCircle } from 'react-icons/lu';
 import clsx from 'clsx';
 import useDebounce from '../hooks/useDebounce';

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateNote } from '../api/api';
-import { Note } from '../types/note';
+import { Note, PaginatedNotes } from '../types/note';
 import toast from 'react-hot-toast';
 
 export const useUpdateNote = (id: number) => {
@@ -9,7 +9,7 @@ export const useUpdateNote = (id: number) => {
     mutationFn: (note) => updateNote(id, note),
     onSuccess: (updatedNote) => {
       toast.success('Note is updated!');
-      queryClient.setQueryData(['notes'], (oldData: any) => {
+      queryClient.setQueryData(['notes'], (oldData: PaginatedNotes) => {
         const newData = {
           ...oldData,
           pages: oldData.pages.map((page: Note[]) =>
