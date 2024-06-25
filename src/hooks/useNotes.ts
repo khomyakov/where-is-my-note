@@ -1,6 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { fetchNotes } from '../api/api';
-import { refetchOptions } from '../utils/refetchOptions';
 
 export const useNotes = (limit: number) => {
   return useInfiniteQuery({
@@ -10,6 +9,5 @@ export const useNotes = (limit: number) => {
       return lastPage.length === limit ? allPages.length + 1 : undefined;
     },
     initialPageParam: 1,
-    ...refetchOptions,
   });
 };

@@ -23,15 +23,14 @@ const NoteForm = ({ note, onAddNote }: NoteFormProps) => {
     defaultValues: note || { title: '', content: '' },
   });
 
-  const createNote = useCreateNote();
-  const updateNote = useUpdateNote(note?.id ?? 0);
+  const { mutate: createNote } = useCreateNote(onAddNote);
+  const { mutate: updateNote } = useUpdateNote(note?.id ?? 0);
 
   const onSubmit = (data: NoteFormInputs) => {
     if (note) {
-      updateNote.mutate(data);
+      updateNote(data);
     } else {
-      createNote.mutate(data);
-      onAddNote?.();
+      createNote(data);
     }
   };
 
