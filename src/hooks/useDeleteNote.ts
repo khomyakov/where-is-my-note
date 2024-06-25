@@ -9,8 +9,9 @@ export const useDeleteNote = () => {
     mutationFn: deleteNote,
     onSuccess: (id) => {
       toast('Note is deleted!');
-      console.log('successfully deleted a note', id);
-      queryClient.setQueryData(['notes', 10], (oldData: any) => {
+
+      // The queryClient.setQueryData can be removed when connected to the real api and replaced with invalidations below
+      queryClient.setQueryData(['notes'], (oldData: any) => {
         console.log('Old Data:', oldData); // Log the old data to debug
         const newData = {
           ...oldData,
@@ -23,7 +24,7 @@ export const useDeleteNote = () => {
       });
       // queryClient.removeQueries(['note', id]);
       // queryClient.invalidateQueries({ queryKey: ['notes'] });
-      // queryClient.invalidateQueries({ queryKey: ['note', id] });
+      // queryClient.invalidateQueries({ queryKey: ['note'] });
     },
     onError: () => {
       toast.error('Failed to delete note!');

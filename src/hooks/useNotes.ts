@@ -3,7 +3,7 @@ import { fetchNotes } from '../api/api';
 
 export const useNotes = (limit: number) => {
   return useInfiniteQuery({
-    queryKey: ['notes', limit],
+    queryKey: ['notes'],
     queryFn: ({ pageParam = 1 }) => fetchNotes(pageParam, limit),
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.length === limit ? allPages.length + 1 : undefined;

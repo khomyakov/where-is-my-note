@@ -9,7 +9,7 @@ export const useCreateNote = () => {
     mutationFn: createNote,
     onSuccess: (newNote) => {
       toast.success('New note created successfully!');
-      queryClient.setQueryData(['notes', 10], (oldData: any) => {
+      queryClient.setQueryData(['notes'], (oldData: any) => {
         if (!oldData) {
           return { pages: [[newNote]], pageParams: [undefined] };
         }
