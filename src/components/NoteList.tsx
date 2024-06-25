@@ -3,7 +3,7 @@ import { useNotes } from '../hooks/useNotes';
 import NoteItem from './NoteItem';
 import { Note } from '../types/note';
 import { sortBy } from 'lodash';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   LiaSortSolid,
   LiaSortNumericDownSolid,
@@ -25,7 +25,10 @@ const NoteList = ({ searchQuery }: { searchQuery: string }) => {
 
   if (isLoading) return <div>Loading...</div>;
 
-  const notes: Note[] = data?.pages.flat() || [];
+  const notes: Note[] = useMemo(() => {
+    return data?.pages.flat() || [];
+  }, [data]);
+
   const filteredNotes = notes.filter(
     (note) =>
       note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
